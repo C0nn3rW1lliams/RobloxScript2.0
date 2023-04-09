@@ -1,0 +1,36 @@
+onst player = document.querySelector('.player');
+const targets = document.querySelectorAll('.target');
+
+function calculateDistance(point1, point2) {
+  const xDiff = point1.x - point2.x;
+  const yDiff = point1.y - point2.y;
+  return Math.sqrt(xDiff * xDiff + yDiff * yDiff);
+}
+
+function findNearestTarget() {
+  let nearestTarget = null;
+  let shortestDistance = Infinity;
+  const playerPosition = { x: player.offsetLeft, y: player.offsetTop };
+  targets.forEach((target) => {
+    const targetPosition = { x: target.offsetLeft, y: target.offsetTop };
+    const distance = calculateDistance(playerPosition, targetPosition);
+    if (distance < shortestDistance) {
+      nearestTarget = target;
+      shortestDistance = distance;
+    }
+  });
+  return nearestTarget;
+}
+
+function snapPlayerToTarget() {
+  const nearestTarget = findNearestTarget();
+  if (nearestTarget) {
+    const targetPosition = { x: nearestTarget.offsetLeft, y: nearestTarget.offsetTop };
+    player.style.left = targetPosition.x + 'px';
+    player.style.top = targetPosition.y + 'px';
+  }
+}
+
+document.addEventListener('click', () => {
+  snapPlayerToTarget();
+});
