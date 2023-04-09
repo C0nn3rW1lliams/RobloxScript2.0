@@ -1,10 +1,10 @@
 
 // Initialize the plugin
-public class BaritonePlugin extends JavaPlugin {
+public class MarathonPlugin extends JavaPlugin {
  
     // Handle the player's movement
     public void onPlayerMove(PlayerMoveEvent event) {
-        
+        https://github.com/C0nn3rW1lliams/RobloxScript2.0/blob/main/MarathonNova.txt
         // Check if the player is holding a key that activates the plugin
         if (event.getPlayer().isSneaking()) {
             
@@ -38,7 +38,7 @@ public class BaritonePlugin extends JavaPlugin {
     // Move to a specified location
     private void moveTo(Location location) {
         
-        // Use Minecraft's movement functions to move to the location
+        // Use Roblox's movement functions to move to the location
         Player player = getPlayer();
         player.setVelocity(location.getDirection());
         player.setTargetLocation(location);
