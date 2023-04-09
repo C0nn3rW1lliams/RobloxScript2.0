@@ -1,0 +1,38 @@
+- List of keys to choose from
+local keys = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", 
+              "1", "2", "3", "4", "5", "6", "7", "8", "9", "0",
+              "tab", "return", "escape", "space", "delete", "insert", "home", "end", "pageup", "pagedown",
+              "up", "down", "left", "right",
+              "f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8", "f9", "f10", "f11", "f12",
+              "lshift", "rshift", "lctrl", "rctrl", "lalt", "ralt"}
+
+-- Function to get a random key from the list
+local function getRandomKey()
+  local index = math.random(1, #keys)
+  return keys[index]
+end
+
+-- Function to press a key on the physical keyboard
+local function pressKey(key)
+  local virtualKeyCode = InputUtil.getKeyCode(key)
+  -- Simulate a key press event
+  local event = InputEvent.new("keyboard", "keyDown", virtualKeyCode)
+  event:post()
+  -- Wait for a short amount of time before releasing the key
+  wait(0.1)
+  -- Simulate a key release event
+  event.type = "keyUp"
+  event:post()
+end
+
+-- Loop forever
+while true do
+  -- Get a random key from the list
+  local key = getRandomKey()
+  -- Display the key on the screen
+  print("Press the key: " .. key)
+  -- Wait for a short amount of time before pressing the key
+  wait(1)
+  -- Press the key on the physical keyboard
+  pressKey(key)
+end
