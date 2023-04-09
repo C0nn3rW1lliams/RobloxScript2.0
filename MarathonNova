@@ -1,0 +1,46 @@
+
+// Initialize the plugin
+public class MarathonPlugin extends JavaPlugin {
+ 
+    // Handle the player's movement
+    public void onPlayerMove(PlayerMoveEvent event) {
+        
+        // Check if the player is holding a key that activates the plugin
+        if (event.getPlayer().isSneaking()) {
+            
+            // Calculate the path to the destination
+            Path path = calculatePath(event.getPlayer().getLocation(), destination);
+            
+            // Follow the calculated path
+            followPath(path);
+        }
+    }
+    
+    // Calculate the optimal path to the destination
+    private Path calculatePath(Location start, Location end) {
+        
+        // Use the A* algorithm to find the shortest path
+        PathFinder pathFinder = new AStarPathFinder();
+        Path path = pathFinder.findPath(start, end);
+        
+        return path;
+    }
+    
+    // Follow the calculated path
+    private void followPath(Path path) {
+        
+        // Follow the path by moving to each waypoint
+        for (Location waypoint : path) {
+            moveTo(waypoint);
+        }
+    }
+    
+    // Move to a specified location
+    private void moveTo(Location location) {
+        
+        // Use Roblox's movement functions to move to the location
+        Player player = getPlayer();
+        player.setVelocity(location.getDirection());
+        player.setTargetLocation(location);
+    }
+}
